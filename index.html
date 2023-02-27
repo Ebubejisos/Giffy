@@ -9,6 +9,7 @@
 </head>
 <body>
   <div class="img">
+    <p style="color: #fc5454;"></p>
     <img src="#" alt="cat...">
     <button type="button">New Image</button>
   </div>
@@ -22,6 +23,7 @@
 
     const img = document.querySelector('img');
     const input = document.querySelector('input');
+    const para = document.querySelector('p');
     const btn1 = document.querySelector('.img>button');
     const btn2 = document.querySelector('.search>button');
     btn1.addEventListener('click', getGif);
@@ -39,6 +41,11 @@
     .then(function(response) {
       const url = response.data.images.original.url;
       img.src = url;
+    })
+    .catch((error)=>{
+      para.innerText = error;
+      img.src = '404-error-3060993.svg';
+      console.error(error);
     })
   }
   getGif();
