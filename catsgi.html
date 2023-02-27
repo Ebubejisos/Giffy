@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="catsgif.css">
+  <title>API usage</title>
+</head>
+<body>
+  <div class="img">
+    <img src="#" alt="cat...">
+    <button type="button">New Image</button>
+  </div>
+  <div class="search">
+    <label for="gif"></label>
+    <input type="text" placeholder="search gif..." id="gif"><br>
+    <button type="button">search</button>
+  </div>
+  <script>
+    let request = 'https://api.giphy.com/v1/gifs/translate?api_key=Q1IUcyZjF7bmgzQMfDxxE5ahPW3veL70&s=cats';
+
+    const img = document.querySelector('img');
+    const input = document.querySelector('input');
+    const btn1 = document.querySelector('.img>button');
+    const btn2 = document.querySelector('.search>button');
+    btn1.addEventListener('click', getGif);
+    btn2.addEventListener('click', function() {
+      const search = input.value;
+      request = `https://api.giphy.com/v1/gifs/translate?api_key=Q1IUcyZjF7bmgzQMfDxxE5ahPW3veL70&s=${search}`;
+      getGif();
+    })
+
+    function getGif(){   
+      fetch(request, {mode:"cors"})
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(response) {
+      const url = response.data.images.original.url;
+      img.src = url;
+    })
+  }
+  getGif();
+
+  </script>
+</body>
+</html>
