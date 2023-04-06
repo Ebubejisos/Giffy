@@ -33,20 +33,28 @@
       getGif();
     })
 
-    function getGif(){   
-      fetch(request, {mode:"cors"})
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      const url = response.data.images.original.url;
-      img.src = url;
-    })
-    .catch((error)=>{
-      para.innerText = error;
-      img.src = '404-error-3060993.svg';
-      console.error(error);
-    })
+    async function getGif(){   
+    try {
+      const response = await fetch(request, {mode:"cors"});
+      const gifData = await response.json();
+      img.src = gifData.data.images.original.url;
+    }
+    catch (error) {
+        para.innerText = error;
+        img.src = '404-error-3060993.svg';
+        console.error(error);
+    }
+      
+    //   fetch(request, {mode:"cors"})
+    // .then(function(response) {
+    //   return response.json();
+    // })
+    // .then(function(response) {
+    //   const url = response.data.images.original.url;
+    //   img.src = url;
+    // })
+    // .catch((error)=>{
+    // })
   }
   getGif();
 
